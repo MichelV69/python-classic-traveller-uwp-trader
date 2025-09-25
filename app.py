@@ -70,10 +70,10 @@ def actualValue(twoDsix):
 
 def getBrokerCommission(brokerLevel):
     match brokerLevel:
-        case 1: return 5
-        case 2: return 10
-        case 3: return 15
-        case 4: return 20
+        case 1: return 0.05
+        case 2: return 0.10
+        case 3: return 0.15
+        case 4: return 0.20
 
 
 def textiles(src, dest, brokerLevel):
