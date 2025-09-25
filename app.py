@@ -4,13 +4,13 @@ import random
 
 
 class Planet:
+    uwp_map = dict(starport = 0, size = 2, atmo = 3, hydro = 4, pop = 5, gov = 6, law = 7, tech = 9)
+
     def __init__(self, name, uwp):
         self.name = name
         self.uwp = uwp
 
     def hexToInt(self, hexStat):
-        if int(hexStat) <= 9:
-            return int(hexStat)
         match hexStat.upper():
             case "A": return 10
             case "B": return 11
@@ -19,6 +19,7 @@ class Planet:
             case "E": return 14
             case "F": return 15
             case "E": return 16
+            case _: return int(hexStat)
 
     def is_agricultural(self):
         if self.atmosphere() < 4 and self.atmosphere() > 9:
@@ -28,8 +29,7 @@ class Planet:
 
     def atmosphere(self):
         # x-234567-9
-        atmo = 4
-        return self.hexToInt(self.uwp[atmo])
+        return self.hexToInt(self.uwp[self.uwp_map['atmo']])
 
 
 # --- functions
