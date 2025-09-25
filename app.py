@@ -8,6 +8,29 @@ class Planet:
         self.name = name
         self.uwp = uwp
 
+    def hexToInt(self, hexStat):
+        if int(hexStat) <= 9:
+            return int(hexStat)
+        match hexStat.upper():
+            case "A": return 10
+            case "B": return 11
+            case "C": return 12
+            case "D": return 13
+            case "E": return 14
+            case "F": return 15
+            case "E": return 16
+
+    def is_agricultural(self):
+        if self.atmosphere() < 4 and self.atmosphere() > 9:
+            return False
+
+        return True
+
+    def atmosphere(self):
+        # x-234567-9
+        atmo = 4
+        return self.hexToInt(self.uwp[atmo])
+
 
 # --- functions
 
@@ -74,32 +97,36 @@ def textiles(src, dest, brokerLevel):
 # --- main work
 
 
-src = Planet("sourceworld", "x-000000-0")
-src.uwp = input("\n Please enter the Source Planet's UWP (x-123456-7): ")
-print("got "+src.uwp)
+def main():
 
-dest = Planet("destworld", "x-000000-0")
-dest.uwp = input("\n Please enter the Destination Planet's UWP (x-123456-7): ")
-print("got "+dest.uwp)
+    src = Planet("sourceworld", "x-000000-0")
+    src.uwp = input("\n Please enter the Source Planet's UWP (x-123456-7): ")
+    print("got "+src.uwp)
 
-brokerLevel = input("\n Please enter the available Broker level (0 .. 4): ")
-print("brokerLevel: "+brokerLevel)
+    dest = Planet("destworld", "x-000000-0")
+    dest.uwp = input("\n Please enter the Destination Planet's UWP (x-123456-7): ")
+    print("got "+dest.uwp)
 
-# roll a pair of D6, do not add them together.
-d6a = random.randint(1, 6)
-d6b = random.randint(1, 6)
+    brokerLevel = input("\n Please enter the available Broker level (0 .. 4): ")
+    print("brokerLevel: "+brokerLevel)
 
-dicePair = d6a*10 + d6b
-print("dicePair: " + str(dicePair))
+    # roll a pair of D6, do not add them together.
+    d6a = random.randint(1, 6)
+    d6b = random.randint(1, 6)
 
-cargo = ""
+    dicePair = d6a*10 + d6b
+    print("dicePair: " + str(dicePair))
 
-match dicePair:
-    case 11:
-        cargo = textiles(src, dest, brokerLevel)
-    case _:
-        cargo = textiles(src, dest, brokerLevel)
+    cargo = ""
 
-print(cargo)
+    match dicePair:
+        case 11:
+            cargo = textiles(src, dest, brokerLevel)
+        case _:
+            cargo = textiles(src, dest, brokerLevel)
+
+    print(cargo)
 
 
+if __name__ == "__main__":
+    main()
