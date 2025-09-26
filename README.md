@@ -37,6 +37,7 @@ Cargo Available: 70 tonnes with a common market value of Cr3,000/ton.
 ### TODO
 
  + pp.105 : Character Skills (Bribery & Admin)
+ + pp.104 : Partial purchase handling fee
  + HouseRule : TL difference affects Quantity of Goods (Tech Goods dice-pair:41+)
  + HouseRule : Sourceworld Starport affects Quantity of Goods (All)
 
