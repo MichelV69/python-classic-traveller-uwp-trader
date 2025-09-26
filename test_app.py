@@ -1,6 +1,5 @@
 import pytest
-
-from app import getBrokerCommission, Planet
+from classicTravellerRules import *
 
 
 class TestGetBrokerCommission:
@@ -27,3 +26,14 @@ class TestPlanetMethods:
 
     def test_extractStatAtmosphere(self):
         assert self.blueMarble.atmosphere() == 7
+
+    def test_extractStatGovernment(self):
+        assert self.blueMarble.government() == 6
+
+    def test_isAgWorld(self):
+        assert self.blueMarble.is_agricultural()
+        assert not (self.blueMarble.is_nonAgricultural())
+
+    def test_isRichWorld(self):
+        assert not self.blueMarble.is_rich()
+        assert not self.blueMarble.is_poor()

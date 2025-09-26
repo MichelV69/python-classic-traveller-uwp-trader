@@ -45,6 +45,22 @@ class Planet:
             return False
         return True
 
+    def is_rich(self):
+        if self.atmosphere() != 6 and self.atmosphere() != 8:
+            return False
+        if self.population() < 6 or self.population() > 8:
+            return False
+        if self.government() < 4 or self.government() > 9:
+            return False
+        return True
+
+    def is_poor(self):
+        if self.atmosphere() < 2 or self.atmosphere() > 5:
+            return False
+        if self.hydrographic() > 3:
+            return False
+        return True
+
     def atmosphere(self):
         return self.hexToInt(self.uwp[self.uwp_map["atmo"]])
 
@@ -53,6 +69,9 @@ class Planet:
 
     def population(self):
         return self.hexToInt(self.uwp[self.uwp_map["pop"]])
+
+    def government(self):
+        return self.hexToInt(self.uwp[self.uwp_map["gov"]])
 
 # --- functions
 

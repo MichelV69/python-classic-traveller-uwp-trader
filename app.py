@@ -1,61 +1,5 @@
 import random
-
-# --- classes
-
-
-class Planet:
-    uwp_map = dict(starport=0, size=2, atmo=3, hydro=4, pop=5, gov=6, law=7, tech=9)
-
-    def __init__(self, name, uwp):
-        self.name = name
-        self.uwp = uwp
-
-    def hexToInt(self, hexStat):
-        match hexStat.upper():
-            case "A":
-                return 10
-            case "B":
-                return 11
-            case "C":
-                return 12
-            case "D":
-                return 13
-            case "E":
-                return 14
-            case "F":
-                return 15
-            case "E":
-                return 16
-            case _:
-                return int(hexStat)
-
-    def is_agricultural(self):
-        if self.atmosphere() < 4 and self.atmosphere() > 9:
-            return False
-        if self.hydrographic() < 4 and self.hydrographic() > 8:
-            return False
-        if self.population() < 5 and self.population() > 7:
-            return False
-        return True
-
-    def is_nonAgricultural(self):
-        if self.atmosphere() > 3:
-            return False
-        if self.hydrographic() > 3:
-            return False
-        if self.population() < 6:
-            return False
-        return True
-
-    def atmosphere(self):
-        return self.hexToInt(self.uwp[self.uwp_map["atmo"]])
-
-    def hydrographic(self):
-        return self.hexToInt(self.uwp[self.uwp_map["hydro"]])
-
-    def population(self):
-        return self.hexToInt(self.uwp[self.uwp_map["pop"]])
-
+from classicTravellerRules import *
 
 # --- functions
 
@@ -106,38 +50,6 @@ def actualValue(twoDsix):
             result = 4.0
 
     return result
-
-
-def getBrokerCommission(brokerLevel):
-    match brokerLevel:
-        case 1:
-            return 0.05
-        case 2:
-            return 0.10
-        case 3:
-            return 0.15
-        case 4:
-            return 0.20
-
-
-def textiles(src, dest, brokerLevel):
-    resultText = "Textiles: "
-    basePrice = 3000
-    availableQuantity = d6(3) * 5
-
-    valueRoll = d6(2)
-    if src.is_agricultural():
-        valueRoll -= 7
-    if src.is_nonAgricultural():
-        valueRoll -= 5
-    if src.is_nonIndustrial():
-        valueRoll -= 3
-
-    purchaseModPercent = actualValue(valueRoll)
-    brokerCommission = getBrokerCommission(brokerLevel)
-
-    return resultText
-
 
 # --- main work
 
