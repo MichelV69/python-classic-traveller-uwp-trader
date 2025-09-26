@@ -1,4 +1,8 @@
+import locale
 from diceBag import *
+
+# Set the locale to CA English
+locale.setlocale(locale.LC_ALL, "en_CA.UTF-8")
 
 # --- classes
 
@@ -155,10 +159,15 @@ def textiles(src, dest, brokerLevel):
 
     resultText = "Cargo Available: " + str(availableQuantity) + " tonnes "
     resultText += (
-        "with a common market value of Cr" + str(basePrice) + "/ton."
+        "with a common market value of Cr"
+        + locale.format_string("%d", basePrice, grouping=True)
+        + "/ton."
     )
     resultText += indent + "We can purchase them locally for Cr"
-    resultText += str(localCost) + " per ton, which is a valuation "
+    resultText += (
+        locale.format_string("%d", localCost, grouping=True)
+        + " per ton, which is a valuation "
+    )
     if purchaseModPercent < 1:
         resultText += "below"
     else:
@@ -166,13 +175,15 @@ def textiles(src, dest, brokerLevel):
     resultText += (
         " common market value." + indent + "That will cost us a total of Cr"
     )
-    resultText += str(orderValue) + "."
+    resultText += locale.format_string("%d", orderValue, grouping=True) + "."
     if int(brokerLevel) > 0:
         resultText += (
             indent + "This is in part due to our Broker, who will charge us"
         )
         resultText += (
-            " Cr" + str(brokerCommission) + " for this transaction."
+            " Cr"
+            + locale.format_string("%d", brokerCommission, grouping=True)
+            + " for this transaction."
         )
 
     valueRoll = d6(2)
@@ -184,20 +195,32 @@ def textiles(src, dest, brokerLevel):
         valueRoll += 3
 
     saleModPercent = actualValue(valueRoll)
-    destSale = basePrice * saleModPercent
+    destSale = int(basePrice * saleModPercent)
     saleValue = int(destSale * availableQuantity)
 
     resultText += indent + "We expect to be able to sell upon arrival to "
     resultText += (
-        dest.name + " for Cr" + str(destSale) + "/ton, which would be"
+        dest.name
+        + " for Cr"
+        + locale.format_string("%d", destSale, grouping=True)
+        + "/ton, which would be"
     )
-    resultText += " a total value of Cr" + str(saleValue) + "."
+    resultText += (
+        " a total value of Cr"
+        + locale.format_string("%d", saleValue, grouping=True)
+        + "."
+    )
     resultText += indent + "That would net a *"
     profitLoss = "profit"
     if saleValue < orderValue:
         profitLoss = "loss"
     resultText += (
-        profitLoss + "* of Cr" + str(abs(saleValue - orderValue)) + "."
+        profitLoss
+        + "* of Cr"
+        + locale.format_string(
+            "%d", abs(saleValue - orderValue), grouping=True
+        )
+        + "."
     )
 
     return resultText

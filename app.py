@@ -47,7 +47,7 @@ def main():
         case _:
             cargo = textiles(src, dest, brokerLevel)
 
-    print("Speculative Cargo Opportunities")
+    print("This Week's Speculative Cargo Opportunity")
     print(
         "From: "
         + src.name
