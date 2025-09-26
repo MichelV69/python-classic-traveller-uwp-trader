@@ -4,7 +4,7 @@ import random
 
 
 class Planet:
-    uwp_map = dict(starport = 0, size = 2, atmo = 3, hydro = 4, pop = 5, gov = 6, law = 7, tech = 9)
+    uwp_map = dict(starport=0, size=2, atmo=3, hydro=4, pop=5, gov=6, law=7, tech=9)
 
     def __init__(self, name, uwp):
         self.name = name
@@ -12,27 +12,53 @@ class Planet:
 
     def hexToInt(self, hexStat):
         match hexStat.upper():
-            case "A": return 10
-            case "B": return 11
-            case "C": return 12
-            case "D": return 13
-            case "E": return 14
-            case "F": return 15
-            case "E": return 16
-            case _: return int(hexStat)
+            case "A":
+                return 10
+            case "B":
+                return 11
+            case "C":
+                return 12
+            case "D":
+                return 13
+            case "E":
+                return 14
+            case "F":
+                return 15
+            case "E":
+                return 16
+            case _:
+                return int(hexStat)
 
     def is_agricultural(self):
         if self.atmosphere() < 4 and self.atmosphere() > 9:
             return False
+        if self.hydrographic() < 4 and self.hydrographic() > 8:
+            return False
+        if self.population() < 5 and self.population() > 7:
+            return False
+        return True
 
+    def is_nonAgricultural(self):
+        if self.atmosphere() > 3:
+            return False
+        if self.hydrographic() > 3:
+            return False
+        if self.population() < 6:
+            return False
         return True
 
     def atmosphere(self):
-        # x-234567-9
-        return self.hexToInt(self.uwp[self.uwp_map['atmo']])
+        return self.hexToInt(self.uwp[self.uwp_map["atmo"]])
+
+    def hydrographic(self):
+        return self.hexToInt(self.uwp[self.uwp_map["hydro"]])
+
+    def population(self):
+        return self.hexToInt(self.uwp[self.uwp_map["pop"]])
 
 
 # --- functions
+
 
 def d6(rolls):
     result = 0
@@ -50,36 +76,54 @@ def actualValue(twoDsix):
         twoDsix = 15
 
     match twoDsix:
-        case 2: result = 0.4
-        case 3: result = 0.5
-        case 4: result = 0.7
-        case 5: result = 0.8
-        case 6: result = 0.9
-        case 7: result = 1.0
-        case 8: result = 1.1
-        case 9: result = 1.2
-        case 10: result = 1.3
-        case 11: result = 1.5
-        case 12: result = 1.7
-        case 13: result = 2.0
-        case 14: result = 3.0
-        case 15: result = 4.0
+        case 2:
+            result = 0.4
+        case 3:
+            result = 0.5
+        case 4:
+            result = 0.7
+        case 5:
+            result = 0.8
+        case 6:
+            result = 0.9
+        case 7:
+            result = 1.0
+        case 8:
+            result = 1.1
+        case 9:
+            result = 1.2
+        case 10:
+            result = 1.3
+        case 11:
+            result = 1.5
+        case 12:
+            result = 1.7
+        case 13:
+            result = 2.0
+        case 14:
+            result = 3.0
+        case 15:
+            result = 4.0
 
     return result
 
 
 def getBrokerCommission(brokerLevel):
     match brokerLevel:
-        case 1: return 0.05
-        case 2: return 0.10
-        case 3: return 0.15
-        case 4: return 0.20
+        case 1:
+            return 0.05
+        case 2:
+            return 0.10
+        case 3:
+            return 0.15
+        case 4:
+            return 0.20
 
 
 def textiles(src, dest, brokerLevel):
     resultText = "Textiles: "
     basePrice = 3000
-    availableQuantity = d6(3)*5
+    availableQuantity = d6(3) * 5
 
     valueRoll = d6(2)
     if src.is_agricultural():
@@ -94,6 +138,7 @@ def textiles(src, dest, brokerLevel):
 
     return resultText
 
+
 # --- main work
 
 
@@ -101,20 +146,20 @@ def main():
 
     src = Planet("sourceworld", "x-000000-0")
     src.uwp = input("\n Please enter the Source Planet's UWP (x-123456-7): ")
-    print("got "+src.uwp)
+    print("got " + src.uwp)
 
     dest = Planet("destworld", "x-000000-0")
     dest.uwp = input("\n Please enter the Destination Planet's UWP (x-123456-7): ")
-    print("got "+dest.uwp)
+    print("got " + dest.uwp)
 
     brokerLevel = input("\n Please enter the available Broker level (0 .. 4): ")
-    print("brokerLevel: "+brokerLevel)
+    print("brokerLevel: " + brokerLevel)
 
     # roll a pair of D6, do not add them together.
     d6a = random.randint(1, 6)
     d6b = random.randint(1, 6)
 
-    dicePair = d6a*10 + d6b
+    dicePair = d6a * 10 + d6b
     print("dicePair: " + str(dicePair))
 
     cargo = ""
