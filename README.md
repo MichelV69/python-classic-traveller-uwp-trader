@@ -22,16 +22,16 @@ This PYTHON-3.18 application is intended to reduce the creation of potential buy
 ### Sample Output
 
 ```text
-Speculative Cargo Opportunities
+This Week's Speculative Cargo Opportunity
 From: sourceworld (C-767795-9  [Ag] [Ri])
 To: destworld (B-222699-B  [NAg] [NIn] [P])
 
-Cargo Available: 70 tonnes with a common market value of Cr3000/ton.
-   We can purchase them locally for Cr2400.0 per ton, which is a valuation below common market value.
-   That will cost us a total of Cr168000.
-   This is in part due to our Broker, who will charge us Cr8400.0 for this transaction.
-   We expect to be able to sell upon arrival to destworld for Cr5100.0/ton, which would be a total value of Cr357000.
-   That would net a *profit* of Cr189000.
+Cargo Available: 70 tonnes with a common market value of Cr3,000/ton.
+    We can purchase them locally for Cr1,500 per ton, which is a valuation below common market value.
+    That will cost us a total of Cr105,000.
+    This is in part due to our Broker, who will charge us Cr5,250 for this transaction.
+    We expect to be able to sell upon arrival to destworld for Cr3,600/ton, which would be a total value of Cr252,000.
+    That would net a *profit* of Cr147,000.
 ```
 
 ### credits
