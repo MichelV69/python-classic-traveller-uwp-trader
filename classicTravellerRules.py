@@ -32,11 +32,11 @@ class Planet:
                 return int(hexStat)
 
     def is_agricultural(self):
-        if self.atmosphere() < 4 and self.atmosphere() > 9:
+        if self.atmosphere() < 4 or self.atmosphere() > 9:
             return False
-        if self.hydrographic() < 4 and self.hydrographic() > 8:
+        if self.hydrographic() < 4 or self.hydrographic() > 8:
             return False
-        if self.population() < 5 and self.population() > 7:
+        if self.population() < 5 or self.population() > 7:
             return False
         return True
 
@@ -148,7 +148,7 @@ def textiles(src, dest, brokerLevel):
     indent = "\n    "
     purchaseModPercent = actualValue(valueRoll)
     localCost = basePrice * purchaseModPercent
-    orderValue = availableQuantity * localCost
+    orderValue = int(availableQuantity * localCost)
     brokerCommission = round(
         float(getBrokerCommission(brokerLevel)) * int(orderValue), 0
     )
@@ -184,8 +184,20 @@ def textiles(src, dest, brokerLevel):
         valueRoll += 3
 
     saleModPercent = actualValue(valueRoll)
-    brokerCommission = getBrokerCommission(brokerLevel)
-
     destSale = basePrice * saleModPercent
+    saleValue = int(destSale * availableQuantity)
+
+    resultText += indent + "We expect to be able to sell upon arrival to "
+    resultText += (
+        dest.name + " for Cr" + str(destSale) + "/ton, which would be"
+    )
+    resultText += " a total value of Cr" + str(saleValue) + "."
+    resultText += indent + "That would net a *"
+    profitLoss = "profit"
+    if saleValue < orderValue:
+        profitLoss = "loss"
+    resultText += (
+        profitLoss + "* of Cr" + str(abs(saleValue - orderValue)) + "."
+    )
 
     return resultText

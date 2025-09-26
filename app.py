@@ -6,11 +6,13 @@ from diceBag import *
 
 
 def main():
+    # C-767795-9 (rich ag)
+    # B-222699-B (NAg Ind)
 
-    src = Planet("sourceworld", "C-888888-C")
+    src = Planet("sourceworld", "C-767795-9")
     # src.uwp = input("\n Please enter the Source Planet's UWP (x-123456-7): ")
 
-    dest = Planet("destworld", "A-456789-B")
+    dest = Planet("destworld", "B-222699-B")
     # dest.uwp = input("\n Please enter the Destination Planet's UWP (x-123456-7): ")
 
     brokerLevel = (
