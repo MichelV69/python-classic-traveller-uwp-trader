@@ -34,6 +34,12 @@ Cargo Available: 70 tonnes with a common market value of Cr3,000/ton.
     That would net a *profit* of Cr147,000.
 ```
 
+### TODO
+
+ + pp.105 : Character Skills (Bribery & Admin)
+ + HouseRule : TL difference affects Quantity of Goods (Tech Goods dice-pair:41+)
+ + HouseRule : Sourceworld Starport affects Quantity of Goods (All)
+
 ### credits
 
 Code formatting by BLACK https://github.com/psf/black
