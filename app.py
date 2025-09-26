@@ -45,6 +45,26 @@ def main():
         case _:
             cargo = textiles(src, dest, brokerLevel)
 
+    print("Speculative Cargo Opportunities")
+    print(
+        "From: "
+        + src.name
+        + " ("
+        + src.uwp
+        + " "
+        + src.getTradeClasses()
+        + ")"
+    )
+    print(
+        "To: "
+        + dest.name
+        + " ("
+        + dest.uwp
+        + " "
+        + dest.getTradeClasses()
+        + ") \n"
+    )
+
     print(cargo)
 
 

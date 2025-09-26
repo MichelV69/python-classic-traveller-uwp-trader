@@ -40,5 +40,5 @@ class TestPlanetMethods:
 
     def test_getTradeClasses(self):
         assert self.blueMarble.getTradeClasses().__contains__("[Ag]")
-        assert not(self.blueMarble.getTradeClasses().__contains__("[Ind]"))
+        assert not (self.blueMarble.getTradeClasses().__contains__("[Ind]"))
         assert self.blueMarble.getTradeClasses().__contains__("[NIn]")

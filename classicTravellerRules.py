@@ -116,6 +116,7 @@ class Planet:
 
         return tradeClasses
 
+
 # --- functions
 
 
@@ -153,7 +154,9 @@ def textiles(src, dest, brokerLevel):
     )
 
     resultText = "Cargo Available: " + str(availableQuantity) + " tonnes "
-    resultText += "with a common market value of Cr" + str(basePrice) + "/ton."
+    resultText += (
+        "with a common market value of Cr" + str(basePrice) + "/ton."
+    )
     resultText += indent + "We can purchase them locally for Cr"
     resultText += str(localCost) + " per ton, which is a valuation "
     if purchaseModPercent < 1:
