@@ -94,6 +94,27 @@ class Planet:
     def government(self):
         return self.hexToInt(self.uwp[self.uwp_map["gov"]])
 
+    def getTradeClasses(self):
+        tradeClasses = ""
+        if self.is_agricultural():
+            tradeClasses += " [Ag]"
+
+        if self.is_nonAgricultural():
+            tradeClasses += " [NAg]"
+
+        if self.is_industrial():
+            tradeClasses += " [Ind]"
+
+        if self.is_nonIndustrial():
+            tradeClasses += " [NIn]"
+
+        if self.is_poor():
+            tradeClasses += " [P]"
+
+        if self.is_rich():
+            tradeClasses += " [Ri]"
+
+        return tradeClasses
 
 # --- functions
 
@@ -132,9 +153,9 @@ def textiles(src, dest, brokerLevel):
     )
 
     resultText = "Cargo Available: " + str(availableQuantity) + " tonnes "
-    resultText += " with a common market value of " + str(basePrice) + "."
+    resultText += "with a common market value of Cr" + str(basePrice) + "/ton."
     resultText += indent + "We can purchase them locally for Cr"
-    resultText += str(localCost) + " per tonne, which is a valuation "
+    resultText += str(localCost) + " per ton, which is a valuation "
     if purchaseModPercent < 1:
         resultText += "below"
     else:
