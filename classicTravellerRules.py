@@ -137,7 +137,7 @@ def getBrokerCommission(brokerLevel):
 
 
 def textiles(src, dest, brokerLevel):
-    kindOfGoods = "Textiles: "
+    kindOfGoods = "Textiles"
     basePrice = 3000
     availableQuantity = d6(3) * 5
 
@@ -159,7 +159,9 @@ def textiles(src, dest, brokerLevel):
 
     resultText = "Cargo Available: " + str(availableQuantity) + " tonnes "
     resultText += (
-        "with a common market value of Cr"
+        "of "
+        + kindOfGoods
+        + ", with a common market value of Cr"
         + locale.format_string("%d", basePrice, grouping=True)
         + "/ton."
     )
@@ -172,11 +174,13 @@ def textiles(src, dest, brokerLevel):
         resultText += "below"
     else:
         resultText += "at or above"
+    resultText += " common market value." + indent + "That will cost us Cr"
     resultText += (
-        " common market value." + indent + "That will cost us a total of Cr"
+        locale.format_string("%d", orderValue, grouping=True) + " to aquire."
     )
-    resultText += locale.format_string("%d", orderValue, grouping=True) + "."
+    totalCostOfGoods = orderValue
     if int(brokerLevel) > 0:
+        totalCostOfGoods += brokerCommission
         resultText += (
             indent + "This is in part due to our Broker, who will charge us"
         )
@@ -184,6 +188,10 @@ def textiles(src, dest, brokerLevel):
             " Cr"
             + locale.format_string("%d", brokerCommission, grouping=True)
             + " for this transaction."
+            + indent
+            + "The total cost of the goods would be Cr"
+            + locale.format_string("%d", totalCostOfGoods, grouping=True)
+            + "."
         )
 
     valueRoll = d6(2)
@@ -212,13 +220,13 @@ def textiles(src, dest, brokerLevel):
     )
     resultText += indent + "That would net a *"
     profitLoss = "profit"
-    if saleValue < orderValue:
+    if saleValue < totalCostOfGoods:
         profitLoss = "loss"
     resultText += (
         profitLoss
         + "* of Cr"
         + locale.format_string(
-            "%d", abs(saleValue - orderValue), grouping=True
+            "%d", abs(saleValue - totalCostOfGoods), grouping=True
         )
         + "."
     )
